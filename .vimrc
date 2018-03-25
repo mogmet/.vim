@@ -301,7 +301,7 @@ filetype off
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -363,8 +363,6 @@ NeoBundle 'Shougo/unite.vim'
 let g:unite_enable_start_insert = 1
 let g:unite_enable_split_vertically = 0
 let g:unite_winwidth = 40
-call unite#custom_source('file_rec', 'ignore_pattern', 'vendor/\|tmp/\|log/')
-call unite#custom_source('file_rec/async', 'ignore_pattern', 'vendor/\|tmp/\|log/')
 " バッファ一覧
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 " ファイル一覧
@@ -478,8 +476,6 @@ NeoBundle 'vim-scripts/rdark'
 NeoBundle 'Zenburn'
 NeoBundle 'desert.vim'
 NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'Railscasts-Theme-GUIand256color'
-colorscheme railscasts
 set background=dark
 "let g:solarized_termcolors=256
 " jk
@@ -557,4 +553,9 @@ NeoBundle 'kana/vim-altr'
 
 filetype plugin indent on
 filetype on
+call neobundle#end()
 NeoBundleCheck
+" https://github.com/Shougo/unite.vim/issues/755
+" 下記はneobundle#end()のあとに呼ぶ。
+call unite#custom_source('file_rec', 'ignore_pattern', 'vendor/\|tmp/\|log/')
+call unite#custom_source('file_rec/async', 'ignore_pattern', 'vendor/\|tmp/\|log/')
